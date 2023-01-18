@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { client } from "../../libs/client";
+import { client } from "libs/client";
 
 export default function CategoryId({ blog }) {
   // タグに紐付いたコンテンツがない場合に表示

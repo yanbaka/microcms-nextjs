@@ -1,4 +1,4 @@
-import { client } from "../../libs/client";
+import { client } from "libs/client";
 
 export default function BlogId({ blog }) {
   return (
@@ -8,7 +8,7 @@ export default function BlogId({ blog }) {
       <p>{blog.category && blog.category.name}</p>
       <ul>
         {blog.tags.map((tag) => {
-          return <li>{tag.name}</li>
+          return <li key={tag.id}>{tag.name}</li>
         })}
       </ul>
       <div
