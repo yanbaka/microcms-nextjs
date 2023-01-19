@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { client } from "libs/client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 export default function Home({ blog, category, tag }) {
   const { asPath } = useRouter
+  const [search, setSearch] = useState('')
+  const router = useRouter()
 
   useEffect(() => {
     try {
@@ -21,10 +23,23 @@ export default function Home({ blog, category, tag }) {
     }
   }, [asPath])
 
+  const doSearch = () => {
+    router.push({pathname: 'search', query: { keyword: search }})
+  }
+
   return (
     <div>
-      <h3>サイト内検索</h3>
+      <h3>サイト内検索（GoogleSearch）</h3>
       <div className="gcse-search"></div>
+      <h3>サイト内検索</h3>
+      <div>
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => { setSearch(() => e.target.value) }}
+        />
+        <button onClick={() => doSearch()}>検索</button>
+      </div>
       <h3>タグ一覧</h3>
       <ul>
         {tag.map((tag) => (
