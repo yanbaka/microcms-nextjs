@@ -1,9 +1,30 @@
 import Link from "next/link";
 import { client } from "libs/client";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Home({ blog, category, tag }) {
+  const { asPath } = useRouter
+
+  useEffect(() => {
+    try {
+      const script = document.createElement('script');
+
+      script.src = "https://cse.google.com/cse.js?cx=258808720498d42a4";
+      script.async = true;
+
+      document.body.appendChild(script);
+      document.body.removeChild(script);
+
+    } catch (error) {
+      console.error(error);
+    }
+  }, [asPath])
+
   return (
     <div>
+      <h3>サイト内検索</h3>
+      <div className="gcse-search"></div>
       <h3>タグ一覧</h3>
       <ul>
         {tag.map((tag) => (
